@@ -1,24 +1,26 @@
 package com.example.json.mapper;
 
-import com.example.json.dto.*;
+import com.example.json.dto.payload.*;
 import com.example.json.entity.*;
-import org.mapstruct.CollectionMappingStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
+
 @Lazy
-@Mapper(componentModel = "spring",
+@Mapper(config = SpringMappingConfig.class,
+        uses = SharedMapper.class,
         collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED
 )
 public interface FormMapper {
+
     FormMapper INSTANCE = Mappers.getMapper(FormMapper.class);
 
     ParentFormDto parentToDto(ParentForm parentForm);
     List<ParentFormDto> parentToparentAllDtos(List<ParentForm> parentForms);
     ParentForm  dtoToParent(ParentFormDto parentFormDto);
+
     ChildrenFormDto childrenToDto(ChildrenForm childrenForm);
     List<ChildrenFormDto> childrenTchildrenAllDtos(List<ChildrenFormDto> authors);
     ChildrenForm dtoToChildren(ChildrenFormDto childrenFormDto);

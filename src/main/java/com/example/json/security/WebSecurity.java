@@ -27,7 +27,7 @@ public class WebSecurity {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/form")//.permitAll()
                 .access(new WebExpressionAuthorizationManager("hasIpAddress('"+environment.getProperty("gateway.ip")+"')"))
-                .requestMatchers(new AntPathRequestMatcher("/api/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/kyc/**")).permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.headers().frameOptions().disable();

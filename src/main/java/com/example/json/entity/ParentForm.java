@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -18,4 +18,35 @@ public class ParentForm {
     @OneToMany( cascade = { CascadeType.ALL },orphanRemoval = true,fetch = FetchType.EAGER,mappedBy = "parentForm")
     private List<ChildrenForm> childrenForms;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ChildrenForm> getChildrenForms() {
+        return childrenForms;
+    }
+
+    public void setChildrenForms(List<ChildrenForm> childrenForms) {
+        this.childrenForms = childrenForms;
+    }
 }

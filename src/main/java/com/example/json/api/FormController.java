@@ -1,5 +1,5 @@
 package com.example.json.api;
-import com.example.json.dto.ParentFormDto;
+import com.example.json.dto.payload.ParentFormDto;
 import com.example.json.service.FormService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
-public class InfoController {
+@RequestMapping("/kyc")
+public class FormController {
 
     private  final  FormService formService;
     private  final Environment env;
@@ -20,9 +20,8 @@ public class InfoController {
     public List<ParentFormDto> getAllInfos(){
         return formService.getAllInfos();
     }
-    @PostMapping("/create_form")
+    @PostMapping("/createForm")
     public ParentFormDto CreateInfo(@RequestBody ParentFormDto info) {
-
         return formService.createForm(info);
     }
     @GetMapping("/getFormById/{id}")

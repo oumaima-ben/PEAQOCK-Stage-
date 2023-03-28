@@ -1,10 +1,5 @@
-package com.example.json.dto;
+package com.example.json.dto.payload;
 
-import com.example.json.entity.ChildrenForm;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
 import lombok.*;
 
 import java.util.List;

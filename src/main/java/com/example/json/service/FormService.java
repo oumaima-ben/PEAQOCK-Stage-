@@ -1,7 +1,6 @@
 package com.example.json.service;
 
-import com.example.json.dto.ParentFormDto;
-import com.example.json.entity.ParentForm;
+import com.example.json.dto.payload.ParentFormDto;
 
 import java.util.List;
 
