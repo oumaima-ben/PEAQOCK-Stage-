@@ -2,6 +2,7 @@ package com.example.json.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Setter
@@ -13,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 
 @ToString
-
+@Transactional
 @Entity
 public class ChildrenForm {
     @Id
