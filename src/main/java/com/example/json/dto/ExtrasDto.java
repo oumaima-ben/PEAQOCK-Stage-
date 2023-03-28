@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @Builder
 public class ExtrasDto {
-    private Long id_extras;
     //private QuestionDto question;
     private String optionText;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class QuestionDto {
 
    // private ChildrenFormDto childrenForm;
-   private Long id;
+
     private String questionText;
     private String questionType;
     private Boolean required;

@@ -12,7 +12,6 @@ import lombok.*;
 @Setter
 @Builder
 public class OptionDto {
-    private Long id;
 private String optionText;
 //@JsonIgnore
 //private QuestionDto question;

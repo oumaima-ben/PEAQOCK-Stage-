@@ -14,7 +14,6 @@ import java.util.List;
 @Setter
 @Builder
 public class ParentFormDto {
-    private Long id;
     private String title;
     private String  description ;
     private List<ChildrenFormDto> childrenForms;

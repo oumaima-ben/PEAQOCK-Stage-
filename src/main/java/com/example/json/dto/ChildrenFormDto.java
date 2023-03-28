@@ -11,10 +11,11 @@ import java.util.List;
 @Setter
 @Builder
 public class ChildrenFormDto {
-    private Long id;
     private String documentName;
     private String documentDescription;
-   //private ParentFormDto parentForm;
+
+    //@JsonIgnore
+    private ParentFormDto parentForm;
     private List<QuestionDto> question;
 
 }

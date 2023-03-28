@@ -15,50 +15,52 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
 @Transactional
-
+@RequiredArgsConstructor
 public class FormServiceImpl implements FormService {
-@Autowired
-private  FormService formService;
-    @Autowired
-private  InfoRepository inforepository;
-    @Autowired
-private  FormMapper formMapper;
+
+
+private final InfoRepository inforepository;
+
+private final FormMapper formMapper;
 
     @Override
     public List<ParentFormDto> getAllInfos() {
-        List<ParentForm> parentForms = inforepository.findAll();
-        return formMapper.parentToparentAllDtos(parentForms);
+        return formMapper.parentToparentAllDtos(inforepository.findAll());
     }
     @Override
     public ParentFormDto getInfoById(Long id) {
-        ParentForm entityinfo = inforepository.findById(id)
+        return inforepository.findById(id)
+                .map(parentForm -> formMapper.parentToDto(parentForm))
                 .orElseThrow(() -> new ResourceNotFoundException("info not exist with id :" + id));
-        return formMapper.parentToDto(entityinfo);
     }
     @Override
-    public ParentFormDto createInfo(ParentFormDto parentFormDto) {
-           ParentForm parentForm=inforepository.save(formMapper.dtoToParent(parentFormDto));
-           //  return inforepository.save(parentFormDto);
-            return formMapper.parentToDto(parentForm);
+    public ParentFormDto createForm(ParentFormDto parentFormDto) {
+         //  ParentForm parentForm=inforepository.save(formMapper.dtoToParent(parentFormDto));
+        return formMapper.parentToDto(inforepository.save(formMapper.dtoToParent(parentFormDto)));
     }
     @Override
-    public  String deleteInfo(Long id) {
+    public  void deleteForm(Long id) {
         ParentForm parentForm = inforepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("info not exist with id :" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("This object with the given id: "+ id+" does not exist"));
         inforepository.delete(parentForm);
-        return "deleted";
     }
     @Override
-    public ParentFormDto updateInfo(Long id, ParentFormDto parentFormDto) {
-        Optional<ParentForm> optionalForm = inforepository.findById(id);
+    public ParentFormDto updateForm(Long id, ParentFormDto parentFormDto) {
+       /* Optional<ParentForm> optionalForm = inforepository.findById(id);
         if (!optionalForm.isPresent()){
         }
         ParentForm existingForm = optionalForm.get();
         formMapper.INSTANCE.updateFromDto(parentFormDto, existingForm);
         existingForm = inforepository.save(existingForm);
-        return formMapper.parentToDto(existingForm);
+        return formMapper.parentToDto(existingForm);*/
+
+        //ParentForm existingForm = inforepository.findById(id)
+
+        return formMapper.parentToDto(
+                inforepository.findById(id)
+                                .map(existingForm -> inforepository.save(formMapper.updateFromDto(parentFormDto,existingForm)))
+                                .orElseThrow(()->new ResourceNotFoundException("This object doesn't exist!"))
+        );
     }
 }
